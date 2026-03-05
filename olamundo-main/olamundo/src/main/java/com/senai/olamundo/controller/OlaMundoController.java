@@ -3,6 +3,7 @@ package com.senai.olamundo.controller;
 import com.senai.olamundo.OlamundoApplication;
 import com.senai.olamundo.model.Contato;
 import com.senai.olamundo.service.ContatoService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -32,9 +33,7 @@ public class OlaMundoController {
     }
 
     @PostMapping
-    public Contato postContato(
-        @RequestBody Contato contato
-    ) throws SQLException {
+    public Contato postContato(@Valid @RequestBody Contato contato) throws SQLException {
 
         try {
             contato = contatoService.cadastrarContato(contato);
@@ -52,10 +51,7 @@ public class OlaMundoController {
     }
 
     @PutMapping("/{id}")
-    public Contato atualizarContato(
-            @PathVariable int id,
-            @RequestBody Contato contato
-    ) {
+    public Contato atualizarContato(@Valid @PathVariable int id, @RequestBody Contato contato) {
         SQLException exception = new SQLException();
 
         try {
